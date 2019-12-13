@@ -1,0 +1,172 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 cliente_tags %}
+{% block extrahead %}
+    <link href="{% static 'assets/css/easyzoom.css'%}" rel="stylesheet">
+    <script src="{% static 'assets/js/easyzoom.js'%}"></script>
+{% endblock %}
+
+{% block script %}
+    // Instantiate EasyZoom instances
+    var $easyzoom = $('.easyzoom').easyZoom();
+
+    // Get an instance API
+    var api = $easyzoom.data('easyZoom');
+    var x = 0;
+    var y = 0;
+
+    $('a:not([href])').click(function(){
+        var that = this;
+        var el = $(this).attr('id'); 
+        var canvas = document.getElementById('canvas');  
+        var context = canvas.getContext('2d');  
+        var imageObj1 = new Image(700,700);  
+        var x = 0; 
+        var y = 0;
+        imageObj1.style= "z-index:-10;";
+        
+        imageObj1.src = $('#'+el).attr('data-href');  
+        imageObj1.onload = function() { 
+            context.drawImage(imageObj1, 0,0);  
+            var imageObj2 = new Image(159,138);  
+            alert('kd');
+            if($('#'+el).attr('data-url-logo') == '#undefined'){
+                alert('Por favor adicione uma logo ao seu perfil para fazer o download.');
+                return;
+            }
+            imageObj2.src = $('#'+el).attr('data-url-logo');
+            
+            imageObj2.onload = function() {  
+                if($('#'+el).attr('data-coordenadas')==='Canto superior direito'){
+                    x =  imageObj1.width-imageObj2.width-159;
+                }
+                if($('#'+el).attr('data-coordenadas')==='Canto superior esquerdo'){
+                    //pass
+                }
+                if($('#'+el).attr('data-coordenadas')==='Canto inferior direito'){
+                    x = imageObj1.width-imageObj2.width-159;
+                    y = imageObj1.height-imageObj2.height-10;
+                }
+                if($('#'+el).attr('data-coordenadas')==='Canto inferior esquerdo'){
+                    y = imageObj1.height-imageObj2.height-10;
+                }
+                if($('#'+el).attr('data-coordenadas')==='Centro'){
+                    //pass
+                }
+                
+                imageObj2.style= "z-index:110;";
+            
+                context.drawImage(imageObj2, x, y);
+                download(that);
+            };    
+        }
+        function download(el){
+            console.log('kd 1');
+            var image = canvas.toDataURL("image/jpg");
+            el.href = image; 
+            console.log(el);
+        }
+        
+        
+               
+    });
+    
+    
+{% endblock %}
+{% block content %}
+    <canvas id="canvas" width="700" height="700" style="display:none;"></canvas>
+    <div class="titulo-servico">
+        <h1>{{servicoPage.nome}}</h1>
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logop">
+                        <div class="intro">
+                            <p>{{servicoPage.categoria.descricao|safe}}</p>
+                        </div>
+
+                        <div class="menuz">
+                            {% for servico in servicosPorCategoria.all %}
+                                <div class="intz">
+                                {% if servicoPage.nome == 'Post Gratuito' %}
+                                    <div class="imgz img-post">
+                                {% else %}
+                                    {% if servicoPage.nome == 'Website' %}
+                                        <div class="imgz img-post">
+                                    {% else %}
+                                        <div class="imgz">
+                                    {% endif %}
+                                {% endif %}
+                                            <div class="easyzoom easyzoom--overlay is-ready">
+                                                <a href="{{MEDIA_URL}}{{servico.imagem}}">
+                                                    <img src="{{MEDIA_URL}}{{servico.imagem}}" class="img-dentro">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="caixa">
+                                            <h3>{{servico.nome}}</h3>
+                                            <p>{{servico.descricao}}</p>
+                                            <div class="baixo">
+                                                <div class="precoz">
+                                                    {% if servico.valor %}
+                                                        <p>R${{servico.valor}}</p>
+                                                    {% else %}
+                                                        <p>Grátis</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="visualizar">
+                                                    {% if servico.valor %}
+                                                        <a href="{{servico.codigoPagSeguro}}">Comprar</a>
+                                                        <!--criar codigo enviando email ao adm, para acompanhar a transação-->
+                                                        <!--<div id="adviceAdm">{{servico.codigoPagSeguro|safe}}</div>-->
+                                                    {% else %}
+                                                        {% get_arquivo servico cliente %}
+
+                                                    {% endif %}
+
+
+                                                </div>
+                                                {% if servico.visualizar %}
+                                                <div class="visualizar">
+                                                    {% if servicoPage.nome == 'Website' %}
+                                                        <a href="{{servico.slogan}}" target="_blank">Visualizar site</a>
+                                                    {% elif servicoPage.nome == 'Plataforma' %}
+                                                        <a href="{{servico.slogan}}" target="_blank">Visualizar site</a>
+                                                    {% else %}
+                                                        <a class="example-image-link" href="{{MEDIA_URL}}{{servico.imagem}}" data-lightbox="example-2" data-title="{{servico.nome}}">Visualizar</a>
+                                                    {% endif %}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                            </div>
+                            {% endfor %}
+                            <div style="clear:both"></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header accordion">
+                                    <h4 class="title">Não encontrou o que gostaria? Favor nos ajude entender sua necessidade!</h4>
+                                </div>
+                                <div class="content">
+                                    <form method="POST" class="necessidade-form">{% csrf_token %}
+                                        {% bootstrap_form_errors necessidadeForm %}
+                                        {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                                        {% bootstrap_button "Enviar" button_type="submit" button_class="save-btn btn-wd botao-op" %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'adm/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}Controle de Acesso{% endblock %}
+{% block activeMenuItemPage8 %}active{% endblock %}
+{% block style %}
+.cima ul{list-style: none;padding-left: 0;}
+.cima ul li{
+float: left;
+width: 14.2%;
+text-align: center;
+}
+.baixo{
+clear: both;
+}
+.baixo ul{list-style: none;padding-left: 0;}
+.baixo ul li{
+float: left;
+width: 14.2%;
+text-align: center;
+}
+
+categorya, .categoryb {
+    display:none;
+    width: 30px;
+    height: 20px;
+    line-height:20px;
+    text-align:center;
+    background: red;
+    margin: 10px;
+    float: left;
+    font-size:11px;
+    color:white;
+    font-family:sans-serif;
+}
+.ttt{
+    border-top: 1px solid #053367;
+}
+
+.categoryb {
+    background: blue;
+}
+
+.categorya.categoryb{
+    background:purple;
+}
+p.info{
+    padding:30px 20px 0 20px;
+    color:#666;
+    font-family:sans-serif;
+    font-size:13px;
+}
+
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+{% endblock %}
+{% block content %}
+ <div class="row">
+     <div class="col-md-12">
+        <form role="form" method="POST" class="post-form">{% csrf_token %}
+           {% bootstrap_form_errors planoForm %}
+           {% bootstrap_form planoForm form_group_class="col-md-6" %}
+           {% bootstrap_button "Salvar" button_type="submit" button_class="save-btn btn btn-info btn-fill btn-wd" %}
+        </form>
+     </div>
+ </div>
+ <div class="row">
+   <div style="clear:both;"></div>
+   <div class="card">
+      <div class="row">
+         <div class="content table-cliente table-responsive table-full-width">
+           <div class="cima">
+               <ul>
+                  <li>ID</li>
+                  <li>Plano</li>
+                  <li>Meses de vigência</li>
+                  <li>Op Pagas</li>
+                  <li>Op Disfarçadas</li>
+                  <li>Status</li>
+               </ul>
+           </div>
+           <div class="baixo">
+               {% for plano in planos %}
+               <ul>
+                  <li>{{plano.id}}</li>
+                  <li>{{plano.nome|default_if_none:"Sem registro"}}</li>
+                  <li>{{plano.mesesParaExpirar|default_if_none:"Sem registro"}}</li>
+                  <li>{{plano.quantidadePadraoDeOportunidadesPagas|default_if_none:"0"}}</li>
+                  <li>{{plano.quantidadePadraoDeOportunidadesDisfarcadas|default_if_none:"0"}}</li>
+                  <li>{{plano.status}}</li>
+                  <li class="edite"><a href="/adm/plano/{{plano.id}}/edit/" id="edit-btn" class="editar accordion">Editar</a></li>
+               </ul>
+               <!-- <div id="collapseOne" class="col-lg-12 col-md-12" style="display:none">
+                  <div class="card">
+                     <div class="header">
+                        <h4 class="title">Editar Perfil do Cliente</h4>
+                     </div>
+                     <div class="content" id="content_{{cliente.id}}"></div>
+                  </div>
+               </div> -->
+               {% endfor %}
+           </div>
+        </div>
+      </div>
+   </div>
+ </div>
+
+{% endblock %}
+{% block script %}
+$(function() {
+    $("button.accordion").click(function(){
+        if($(this).hasClass("ativo")){
+            $(this).removeClass("ativo");
+        } else{
+            $(this).addClass("ativo");
+        }
+    });
+});
+{% endblock %}

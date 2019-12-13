@@ -1,0 +1,121 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png'%}">
+<link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png'%}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>4 Mãos</title>
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Bootstrap core CSS     -->
+<link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" />
+<!-- Animation library for notifications   -->
+<link href="{% static 'assets/css/animate.min.css'%}" rel="stylesheet"/>
+<!--  Paper Dashboard core CSS    -->
+<link href="{% static 'assets/css/style.css'%}" rel="stylesheet"/>
+<link href="{% static 'assets/css/responsive.css'%}" rel="stylesheet"/>
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="{% static 'assets/css/demo.css'%}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/component.css'%}" />
+<!--  Fonts and icons     -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"> -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet"> -->
+<link href="{% static 'assets/css/themify-icons.css'%}" rel="stylesheet">
+
+<!--Core JS Files-->
+<script src="{% static 'assets/js/jquery-3.1.1.min.js'%}"></script>
+<script src="{% static 'assets/js/jquery-ui-1.12.1.min.js'%}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js'%}" type="text/javascript"></script>
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="{% static 'assets/js/bootstrap-checkbox-radio.js'%}"></script>
+<!--  Charts Plugin -->
+<script src="{% static 'assets/js/chartist.min.js'%}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'assets/js/bootstrap-notify.js'%}"></script>
+
+<style type="text/css">
+.categorya, .categoryb {
+    display:none;
+    width: 30px;
+    height: 20px;
+    line-height:20px;
+    text-align:center;
+    background: red;
+    margin: 10px;
+    float: left;
+    font-size:11px;
+    color:white;
+    font-family:sans-serif;
+}
+.ttt{
+    border-top: 1px solid #053367;
+}
+
+.categoryb {
+    background: blue;
+}
+
+.categorya.categoryb{
+    background:purple;
+}
+p.info{
+    padding:30px 20px 0 20px;
+    color:#666;
+    font-family:sans-serif;
+    font-size:13px;
+}
+
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+{% block style %}{% endblock %}
+</style>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+<div class="wrapper">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png'%}">
+<link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png'%}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>4 Mãos</title>
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<!--Core JS Files-->
+<script src="{% static 'assets/js/jquery-3.1.1.min.js'%}"></script>
+<script src="{% static 'assets/js/jquery-ui-1.12.1.min.js'%}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js'%}" type="text/javascript"></script>
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="{% static 'assets/js/bootstrap-checkbox-radio.js'%}"></script>
+<!--  Charts Plugin -->
+<script src="{% static 'assets/js/chartist.min.js'%}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'assets/js/bootstrap-notify.js'%}"></script>
+<!--  Google Maps Plugin    -->
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="{% static 'assets/js/paper-dashboard.js'%}"></script>
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<script src="{% static 'assets/js/demo.js'%}"></script>
+<!-- Bootstrap core CSS     -->
+<link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" />
+<!-- Animation library for notifications   -->
+<link href="{% static 'assets/css/animate.min.css'%}" rel="stylesheet"/>
+<!--  Paper Dashboard core CSS    -->
+<link href="{% static 'assets/css/paper-dashboard.css'%}" rel="stylesheet"/>
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="{% static 'assets/css/demo.css'%}" rel="stylesheet" />
+<!--  Fonts and icons     -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+<link href="{% static 'assets/css/themify-icons.css'%}" rel="stylesheet">
+
+<style type="text/css">
+.categorya, .categoryb {
+    display:none;
+    width: 30px;
+    height: 20px;
+    line-height:20px;
+    text-align:center;
+    background: red;
+    margin: 10px;
+    float: left;
+    font-size:11px;
+    color:white;
+    font-family:sans-serif;
+}
+.ttt{
+    border-top: 1px solid #053367;
+}
+
+.categoryb {
+    background: blue;
+}
+
+.categorya.categoryb{
+    background:purple;
+}
+p.info{
+    padding:30px 20px 0 20px;
+    color:#666;
+    font-family:sans-serif;
+    font-size:13px;
+}
+
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+{% block style %}{% endblock %}
+</style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+    <!--
+        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    -->
+        <div class="sidebar-wrapper">
+            {% block sidebar %}
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    <img src="{% static 'assets/img/logo-4maos-branca.png'%}" width="200px">
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="{% block activeMenuItemPage1 %}{% endblock %}">
+                    <a href="{{site}}adm/cadastro-clientes/">
+                        <i class="ti-user"></i>
+                        <p>Cadastro de clientes</p>
+                    </a>
+                </li>
+                <li class="{% block activeMenuItemPage2 %}{% endblock %}">
+                    <a href="{{site}}adm/upload-oportunidades/">
+                        <i class="ti-upload"></i>
+                        <p>Upload de Oportunidades</p>
+                    </a>
+                </li>
+                <li class="{% block activeMenuItemPage3 %}{% endblock %}">
+                    <a href="{{site}}adm/gestao-oportunidades/">
+                        <i class="ti-upload"></i>
+                        <p>Gestão de Oportunidades</p>
+                    </a>
+                </li>
+                <!-- <li class="{% block activeMenuItemPage4 %}{% endblock %}">
+                    <a href="/adm/upload-oportunidades-disfarcadas/">
+                        <i class="ti-eye"></i>
+                        <p>Upload de Oportunidades Disfarçadas</p>
+                    </a>
+                </li> -->
+                <li class="{% block activeMenuItemPage5 %}{% endblock %}">
+                    <a href="{{site}}adm/upload-conteudo-educativo/">
+                        <i class="ti-upload"></i>
+                        <p>Upload Conteúdo Educativo</p>
+                    </a>
+                </li>
+                <li class="{% block activeMenuItemPage6 %}{% endblock %}">
+                    <a href="{{site}}adm/upload-marketing-apoio/">
+                        <i class="ti-upload"></i>
+                        <p>Upload Marketing de Apoio</p>
+                    </a>
+                </li>
+                <li class="{% block activeMenuItemPage7 %}{% endblock %}">
+                    <a href="{{site}}adm/upload-marketing-avancado/">
+                        <i class="ti-upload"></i>
+                        <p>Upload Marketing Avançado</p>
+                    </a>
+                </li>
+                <li class="{% block activeMenuItemPage8 %}{% endblock %}">
+                    <a href="{{site}}adm/controle-acesso/">
+                        <i class="ti-upload"></i>
+                        <p>Controle de Acesso</p>
+                    </a>
+                </li>
+            </ul>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+           {% block header %}
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="/adm/">{% block title %}{% endblock %}</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-shift-right"></i>
+                                <p>Sair</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endblock %}
+        </nav>
+        <div class="content">
+            <div class="container-fluid">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+               {% block footer %}
+               {% endblock %}
+               <div class="copyright pull-right"></div>
+            </div>
+        </footer>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+$("#filters :checkbox").click(function() {
+   $(".ttt").hide();
+   $("#filters :checkbox:checked").each(function() {
+      $("." + $(this).val()).show();
+   });
+});
+
+var expanded = false;
+
+function showCheckboxes() {
+   var checkboxes = document.getElementById("checkboxes");
+   if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+   } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+   }
+}
+{% block script %}{% endblock %}
+</script>
+</html>

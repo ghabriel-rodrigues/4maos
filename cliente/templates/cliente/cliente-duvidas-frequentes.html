@@ -1,0 +1,129 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage7 %}active{% endblock %}
+{% block style %}
+.duvida{
+    box-shadow: 0 0 20px #eee;
+    margin-bottom: 30px;
+    padding: 0 10px 10px;
+}
+.duvida .accordion::before {
+    content: "+";
+    float: left;
+    color: #013a71;
+    font-size: 30px;
+    position: relative;
+    top: 15px;
+}
+.duvida .accordion.ativo::before {
+    content: "-";
+    float: left;
+    color: #013a71;
+    font-size: 30px;
+    position: relative;
+    top: 12px;
+}
+.duvida button{background-color: transparent;border: none;}
+.duvida h3{
+    text-align: left;
+    margin-left: 30px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #013a71;
+}
+.duvida .dentro{
+    margin-left: 30px;
+    padding-bottom: 30px;
+}
+{% endblock %}
+{% block content %}
+
+{% if cliente.plano.hasLinkDuvidasFrequentes %}
+ <div class="row">
+     <div class="col-lg-12 col-md-12">
+          <div class="content">
+             {% for duvida in duvidas %}
+             <div class="bloco">
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                  <div class="duvida">
+                        <div class="caixa" id="tag{{duvida.id}}">
+                           <button class="accordion" data-toggle="collapse" data-target="#d{{duvida.id}}" aria-expanded="false" aria-controls="d{{duvida.id}}">
+                              <h3>{{duvida.pergunta}}</h3>
+                           </button>
+                        </div>
+                        <div id="d{{duvida.id}}" class="collapse panel tagcontent" aria-labelledby="headingOne" data-parent="#accordion">
+                           <p>{{duvida.resposta}}</p>
+                        </div>
+                     </div>
+                 </div>
+
+             </div>
+             {% endfor %}
+          </div>
+     </div>
+ </div>
+<div class="row">
+   <div class="col-md-12">
+      <div class="card">
+         <div class="header accordion">
+            <h4 class="title">Não encontrou o que gostaria? Favor nos ajude entender sua necessidade!</h4>
+         </div>
+         <div class="content">
+            <form method="POST" class="necessidade-form">{% csrf_token %}
+                {% bootstrap_form_errors necessidadeForm %}
+                {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                {% bootstrap_button "Salvar" button_type="submit" button_class="save-btn btn btn-info btn-fill btn-wd" %}
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% else %}
+<div class="row">
+   <div class="col-md-12">
+      <div class="intro">
+         <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+      </div>
+   </div>
+</div>
+{% endif %} 
+{% endblock %}
+
+{% block script %}
+
+
+
+$(function() {
+    $("button.accordion").click(function(){
+        if($(this).hasClass("ativo")){
+            $(this).removeClass("ativo");   
+        } else{
+            $(this).addClass("ativo");
+        }
+    });
+});
+
+
+$("#filters :checkbox").click(function() {
+$(".ttt").hide();
+$("#filters :checkbox:checked").each(function() {
+$("." + $(this).val()).show();
+});
+});
+
+var expanded = false;
+
+function showCheckboxes() {
+var checkboxes = document.getElementById("checkboxes");
+if (!expanded) {
+checkboxes.style.display = "block";
+expanded = true;
+} else {
+checkboxes.style.display = "none";
+expanded = false;
+}
+}
+{% endblock %}

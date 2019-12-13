@@ -1,0 +1,274 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage1 %}active{% endblock %}
+
+{% block content %}
+<div class="inside">
+{% if cliente %}
+{% if cliente.plano.hasLinkOportunidades %}
+  <div class="">
+    <form class="filters" action="" method="get">
+       {% bootstrap_form_errors oportunidades.form %}
+       {% bootstrap_form oportunidades.form exclude="status" form_group_class="col-md-4" %}
+      <input class="form-control consultar" value="Consultar" type="submit" />
+    </form>
+  </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+         <div class="card">
+             <div class="header">
+                <h4 class="title">Visualização da Oportunidade</h4>
+             </div>
+             <div class="content">
+                {% for oportunidade in oportunidades.qs %}
+                {% if oportunidade.isTotalMenorQueNumeroView %}
+                 <div class="bloco ttt">
+                    <div class="visu">
+                        <div class="col-md-6">
+
+
+                           <!-- <span style="BACKGROUND: #55B774;
+                           BORDER-RADIUS: 15PX;
+                           FONT-SIZE: 12PX;
+                           COLOR: #FFF;
+                           PADDING: 5PX;
+                           MARGIN-RIGHT: 10PX;">
+                              NOVA
+                           </span> -->
+
+                           <h3>
+
+
+                              <span style="
+                              {% for lead in leadsComNegociacoes %}
+                              {% if lead == oportunidade.id %}
+                              BACKGROUND: #EF833F;
+                              {% endif %}
+                              {% endfor %}
+
+                              {% for op in leadsSemNegociacoes %}
+                              {% if op == oportunidade.id %}
+                              BACKGROUND: #55B774;
+                              {% endif %}
+                              {% endfor %}
+
+                              BORDER-RADIUS: 15PX;
+                              FONT-SIZE: 12PX;
+                              COLOR: #FFF;
+                              PADDING: 5PX;
+                              MARGIN-RIGHT: 10PX;">
+                              {% for lead in leadsComNegociacoes %}
+                              {% if lead == oportunidade.id %}
+                                Visualizada
+                              {% endif %}
+                              {% endfor %}
+                              {% for op in leadsSemNegociacoes %}
+                                 {% if op == oportunidade.id %}
+                                   NOVA
+                                 {% endif %}
+                              {% endfor %}
+                              </span>
+
+
+                              {{oportunidade.nome|default_if_none:"Nome da oportunidade não informado"}}
+                           </h3>
+                        </div>
+                        <div class="col-md-6 op-id">
+                           <p>#{{oportunidade.id}}</p>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-md-6">
+                          <div class="data"><p><strong>Nome:</strong> {{oportunidade.primeiroNome|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Finaliza em:</strong> {{oportunidade.dataDeFinalizacao|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Tipo de empresa:</strong> {{oportunidade.tipoDeEmpresa.nome|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Cidade:</strong> {{oportunidade.cidade|default_if_none:"Cidade não informada"}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Grau de Urgência:</strong> {{oportunidade.grauDeUrgencia|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Bairro:</strong> {{oportunidade.bairro|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Preferência:</strong> {{oportunidade.preferencia|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Serviço:</strong> {% for servico in oportunidade.servicoSolicitado.all %}{%if forloop.first%}{{servico.nome}}{%else%}, {{servico.nome}} {%endif%}{% endfor %}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Data da solicitação:</strong> {{oportunidade.dataDeSolicitacao|default_if_none:""}}</p></div>
+                       </div>
+                       <div class="col-md-6">
+                       <div class="data"><p><strong>Número de participantes dessa oportunidade:</strong> {{oportunidade.getTotalParticipantes}}/{{oportunidade.numeroDeParticipantes|default_if_none:""}}</p></div>
+                       </div>
+
+                       <div style="clear:both"></div>
+                       <div data-n="{{oportunidade.getTotalParticipantes}}" data-m="{{oportunidade.numeroDeParticipantes}}" data-id="{{oportunidade.id}}" class="botao-op accordion falar" data-toggle="collapse" data-target="#collapse{{oportunidade.id}}" aria-expanded="false" aria-controls="collapseOne1"><p>Falar com essa oportunidade imediatamente</p></div>
+                    </div>
+                    <div id="collapse{{oportunidade.id}}" class="col-lg-12 col-md-12" style="display:none">
+                       {% csrf_token %}
+                    </div>
+
+                 </div>
+                {% endif %}
+
+                {% endfor %}
+             </div>
+         </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="row">
+       <div class="col-md-12">
+          <div class="intro">
+             <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+          </div>
+       </div>
+    </div>
+    {% endif %}
+  
+  <!--<div class="modal">
+    <div class="modal-overlay modal-toggle"></div>
+    <div class="modal-wrapper modal-transition">
+      <div class="modal-header">
+        <button class="modal-close modal-toggle">X</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-content">
+          <p>Entre em nossa comunidade do Telegram e tenha acesso a informações exclusivas! Ainda não possui o aplicativo em seu celular, baixe gratuitamente agora mesmo!</p>
+          <p><strong>Android:</strong> <a href="http://bit.ly/2neNxOs" target="_blank">http://bit.ly/2neNxOs</a></p>  
+          <p><strong>iOS:</strong> <a href="https://apple.co/2nIpdED" target="_blank">https://apple.co/2nIpdED</a></p>
+
+          <p>Se já tem o aplicativo instalado, basta clicar no link abaixo para participar: <a href="http://bit.ly/com-4m" target="_blank">http://bit.ly/com-4m</p>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+
+</div>
+{% else %}
+<p>Esse usuário não está com nenhuma conta de cliente atrelado a ele. Por favor solicite que a administração adicione isso junto ao painel de configuração.</p>
+{% endif %}
+{% endblock %}
+{% block script %}
+  $('.checkbox').attr('class', 'new_checkbox');
+  $('.new_checkbox').parent().removeClass('checkbox');
+
+  $('#id_cidade').parent().addClass('custom-select');
+
+    var x, i, j, selElmnt, a, b, c;
+    x = document.getElementsByClassName("custom-select");
+    for (i = 0; i < x.length; i++) {
+      selElmnt = x[i].getElementsByTagName("select")[0];
+      /*for each element, create a new DIV that will act as the selected item:*/
+      a = document.createElement("DIV");
+      a.setAttribute("class", "select-selected");
+      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      x[i].appendChild(a);
+      /*for each element, create a new DIV that will contain the option list:*/
+      b = document.createElement("DIV");
+      b.setAttribute("class", "select-items select-hide");
+      for (j = 1; j < selElmnt.length; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < s.length; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                for (k = 0; k < y.length; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+              }
+            }
+            h.click();
+        });
+        b.appendChild(c);
+      }
+      x[i].appendChild(b);
+      a.addEventListener("click", function(e) {
+          /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+      /*a function that will close all select boxes in the document,
+      except the current select box:*/
+      var x, y, i, arrNo = [];
+      x = document.getElementsByClassName("select-items");
+      y = document.getElementsByClassName("select-selected");
+      for (i = 0; i < y.length; i++) {
+        if (elmnt == y[i]) {
+          arrNo.push(i)
+        } else {
+          y[i].classList.remove("select-arrow-active");
+        }
+      }
+      for (i = 0; i < x.length; i++) {
+        if (arrNo.indexOf(i)) {
+          x[i].classList.add("select-hide");
+        }
+      }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+
+
+
+   $('.falar').on('click', function(){
+      $(this).prop('disabled', true);
+      $(this).fadeOut();
+
+      var id = $(this).attr('data-id');
+
+      $.ajax({
+         method: "POST",
+         url: "{% if online %}/quatromaos{%endif%}/oportunidade-falar/"+id+"/",
+         success: function(html){
+            console.log(html);
+            $("#collapse"+id).html( html ).fadeIn(100);
+            var pagas = parseInt($("#creditos").html());
+            pagas = pagas-1;
+
+            if ($("#collapse"+id).find('.card').attr('data-attr-temNegociacao') !== 'True' && pagas >=0){
+               $("#creditos").html(pagas);
+            }
+         }
+      });
+   });
+
+
+
+
+    $(window).on('load',function(){
+      $('.modal').toggleClass('is-visible');
+      $('.modal-close').on('click', function(e) {
+        $('.modal').toggleClass('is-visible');
+      });
+    });
+
+{% endblock %}

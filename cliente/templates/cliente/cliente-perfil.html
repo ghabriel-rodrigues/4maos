@@ -1,0 +1,99 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage6 %}active{% endblock %}
+{% block extrahead %}
+
+
+<link  href="{% static '/assets/js/cropper/cropper.css'%}" rel="stylesheet">
+<script src="{% static '/assets/js/cropper/cropper.js'%}"></script>
+<script src="{% static '/assets/js/cropper/jquery-cropper.js'%}"></script>
+<script src="{% static '/assets/js/cropper/main.js'%}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" /> -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> 
+{% endblock %}
+{% block content %}
+{% if cliente.plano.hasLinkPerfil %}
+<div class="row">
+     <div class="col-lg-12 col-md-12">
+         <div class="card">
+             <div class="header">
+                 <h4 class="title">Dados Cadastrais</h4>
+             </div>
+             <div class="content">
+                 <form id="form" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    {%if enviado%}<h1>Cadastro feito com sucesso!</h1>{%endif%}
+                    {% bootstrap_form_errors profile_form %}
+                    {% bootstrap_form profile_form exclude="status, logo" form_group_class="col-md-6" %}
+                    {%if request.user.cliente.logo %}
+                    <div class="col-md-12">
+                       <label class="control-label" for="id_logo">Logo</label>
+                       <div class="text-left">
+                           <a data-lightbox="image-1" href="{% if online %}/static/uploads/{%else%}/media/{%endif%}{{request.user.cliente.logo}}">
+                               <img  
+                                  style="border:1px solid #efefef; border-radius:5px;" 
+                                  height="138" width="159" 
+                                  src="{% if online %}/static/uploads/{%else%}/media/{%endif%}{{request.user.cliente.logo}}"/></a>
+                        </div>
+                    </div>
+                    
+                    {% endif %}
+                    
+                     <div id="area-crop" class="col-md-12" style="float:left; clear:left; display:none; border:#666 dashed 1px;">
+
+                    
+                        <div class="img-container">
+                           <label for="inputImage" title="Upload image file">
+                              <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                              <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+                              <span class="fa fa-upload"></span>
+                              </span>
+                           </label>
+                           <img id="image" src="{% if online %}/static/uploads/{%else%}/media/{%endif%}{{request.user.cliente.logo}}" id="cropBox"/></td>
+                           <div class="docs-buttons">
+                                 <button 
+                                    type="button" 
+                                    style="background:none; border:1px solid #afafaf; margin-top:10px; border-radius: 5px;"
+                                    data-method="getCroppedCanvas" 
+                                    data-option="{ 'maxWidth': 159, 'maxHeight': 138 }">
+                                    Salvar Imagem   
+                                 </button>
+                        
+                                 <input type="hidden" class="form-control" id="dataWidth" value="159">
+                                 <input type="hidden" class="form-control" id="dataHeight" value="138">
+                           </div>
+                        </div>
+                        
+                     </div>
+                     <input type="hidden" name="logo" accept="image/*" id="id_logo">
+                     <input type="hidden" name="logo_type" accept="image/*" id="id_logo_type">
+                     <input type="hidden" name="logo_name" accept="image/*" id="id_logo_name">
+                     
+                     
+                     <div class="text-right"></div>
+                        <a style="border:#666 solid 1px; padding:5px; float: left; color:#666; margin: 10px 0;" id="edit">Editar imagem</a>
+                     
+                        <button style="border:#666 solid 1px; background:none; padding:5px; float: left; color:#666; margin: 10px 10px;" type="submit" id="update">Atualizar</button>
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div>
+ <script type="text/javascript">
+   $('#edit').on('click',function(){
+      $('#area-crop').fadeIn(); 
+   });
+ </script>
+ {% else %}
+ <div class="row">
+    <div class="col-md-12">
+       <div class="intro">
+          <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+       </div>
+    </div>
+ </div>
+ {% endif %}
+
+ {% endblock %}

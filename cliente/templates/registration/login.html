@@ -1,0 +1,35 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block content %}
+               {% if form.errors %}
+               <br/>
+            	<p style="font-weight:700; color:#FFF;">Seu EMAIL ou sua SENHA n&atilde;o conferem. Por favor tente novamente.</p>
+            	{% endif %}
+            	<form class="formulario" id="id_form_cadastro" action="{{settings.LOGIN_URL}}" method="POST">
+            		{% csrf_token %}
+
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <label>Login</label>
+                              <input name="username" id="id_username" type="text" class="form-control border-input" placeholder="" value="">
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <label>Senha</label>
+                              <input name="password" id="id_password" type="password" class="form-control border-input" placeholder="" value="">
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <input type="submit" class="form-control border-input entrar" value="Entrar">
+                          </div>
+                      </div>
+                      <div class="esqueci">
+                          <p><a href="{% if online %}/quatromaos{%endif%}/accounts/password_reset/">Esqueci minha senha</a></p>
+                      </div>
+            		</div>
+            	</form>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage2 %}active{% endblock %}
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+{% if cliente.plano.hasLinkOportunidadesDisfarcadas %}
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+          <div class="card">
+              <div class="header">
+                  <h4 class="title">Visualização da Oportunidade</h4>
+              </div>
+              <div class="content">
+                 {% if erro %}
+                 <h3><strong>Não foi possível falar com essa oportunidade.</strong></h3>
+                 <p>{{erro}}</p>
+                 {% endif %}
+                 {% if msg %}
+                 <h3><strong>Sucesso!</strong></h3>
+                 <p>{{msg}}</p>
+                 {% endif %}
+                 {% for oportunidade in oportunidadesDisf %}
+                 {% if oportunidade.temDuvidas %}
+                 {% else %}
+                  <div class="bloco">
+                      <div class="ttt abrir mei bh finalizado">
+                         <div class="visu">
+                            <div class="col-md-12 op-id">
+                                <p>#{{oportunidade.id}}</p>
+                            </div>
+                             <div>
+                                 <h3>{{oportunidade.nome|default_if_none:""}}</h3>
+                             </div>
+                             <div style="clear:both"></div>
+                             <div clas="data"><p><strong>Empresa:</strong> {{oportunidade.empresa|default_if_none:""}}</p></div>
+                             <div clas="data"><p><strong>Telefone:</strong> {{oportunidade.telefone|default_if_none:""}}</p></div>
+                             <div clas="data"><p><strong>E-mail:</strong> {{oportunidade.email|default_if_none:""}}</p></div>
+                             <!-- <div clas="data"><p><strong>Endereço:</strong> {{oportunidade.endereco|default_if_none:""}}</p></div> -->
+                             <div clas="data"><p><strong>Descrição da dúvida:</strong> {{oportunidade.observacoes|default_if_none:""}}</p></div>
+                             <form method="POST">{% csrf_token %}
+                                 <div class="row">
+                                     <div class="col-md-12">
+                                         <div class="form-group" id="collapse{{oportunidade.id}}">
+                                            {% bootstrap_form_errors duvidaForm %}
+                                            {% bootstrap_form duvidaForm exclude="dataDeCadastro, oportunidadeRelacionada" form_group_class="col-md-12 border-input" %}
+                                            <input type="submit" data-n="{{oportunidade.getTotalParticipantes}}" data-m="{{oportunidade.numeroDeParticipantes}}" id="{{oportunidade.id}}" data-id="{{oportunidade.id}}" class="falar botao-op btn-wd" value="Enviar"/>
+                                            <input type="hidden" name="oportunidadeRelacionada" value="{{oportunidade.id}}"/>
+                                            <!-- <label><strong>Resposta:</strong></label> -->
+                                            <!-- <textarea rows="5" class="form-control border-input" placeholder="Escreva aqui a sua resposta" value=""></textarea> -->
+                                         </div>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                      </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+
+              </div>
+          </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="row">
+       <div class="col-md-12">
+          <div class="intro">
+             <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+          </div>
+       </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+   $('.falar').on('click', function(ev){
+      console.log($(this).closest('#id_descricao'));
+      $(this).fadeOut();
+   });
+{% endblock %}

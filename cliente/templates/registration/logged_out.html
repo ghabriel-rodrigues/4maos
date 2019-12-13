@@ -1,0 +1,10 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<p style="font-weight:700; color:#FFF;">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+
+<p><a href="{%if online%}/quatromaos{%endif %}/">{% trans 'Log in again' %}</a></p>
+
+{% endblock %}

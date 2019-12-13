@@ -1,0 +1,343 @@
+{% extends 'adm/base.html' %}
+{% load staticfiles %}
+{% block title %}Gestão de Oportunidades{% endblock %}
+{% block activeMenuItemPage3 %}active{% endblock %}
+{% block style %}
+
+.cima ul{list-style: none;padding-left: 0;}
+.cima ul li{
+float: left;
+width: 12.5%;
+text-align: center;
+}
+ .baixo{clear: both;}
+ .baixo ul{list-style: none;padding-left: 0;}
+ .baixo ul li{
+float: left;
+width: 12.5%;
+text-align: center;
+}
+{% endblock %}
+{% block content %}
+ <div class="row">
+     <div class="col-lg-6 col-md-6">
+         <div class="card">
+             <div class="header">
+                 <h4 class="title">Buscar</h4>
+             </div>
+             <div class="content">
+                 <form>
+                     <div class="row">
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label>Nome</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label>CNPJ</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label>Empresa</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label>Código</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                     </div>
+                     <div class="text-right">
+                         <button type="submit" class="btn btn-info btn-fill btn-wd">Buscar</button>
+                     </div>
+                     <div class="clearfix"></div>
+                 </form>
+             </div>
+         </div>
+     </div>
+     <div class="col-lg-3 col-md-3">
+         <div class="card filtro">
+             <div class="header">
+                 <h4 class="title">Filtro</h4>
+             </div>
+             <div class="content">
+                 <form>
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="form-group">
+                                 <label>Filtrar por Status</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                     </div>
+                     <div class="text-right">
+                         <button type="submit" class="btn btn-info btn-fill btn-wd">Filtrar</button>
+                     </div>
+                     <div class="clearfix"></div>
+                 </form>
+             </div>
+         </div>
+     </div>
+     <div class="col-lg-3 col-md-3">
+         <div class="card filtro">
+             <div class="header">
+                 <h4 class="title">Filtro</h4>
+             </div>
+             <div class="content">
+                 <form>
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="form-group">
+                                 <label>Filtrar por Data de Cadastro</label>
+                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                             </div>
+                         </div>
+                     </div>
+                     <div class="text-right">
+                         <button type="submit" class="btn btn-info btn-fill btn-wd">Filtrar</button>
+                     </div>
+                     <div class="clearfix"></div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class="row">
+     <div class="col-md-12">
+         <div class="card">
+             <div class="header">
+                 <h4 class="title">Clientes</h4>
+             </div>
+             <div class="table table-striped">
+                 <div class="cima">
+                     <ul>
+                         <li>ID</li>
+                         <li>Cadastro</li>
+                         <li>Cliente</li>
+                         <li>CNPJ</li>
+                         <li>Data de Encerramento</li>
+                         <li>Quantidade de interados</li>
+                         <li>Status</li>
+                         <li>Ação</li>
+                     </ul>
+                 </div>
+                 <div class="baixo">
+                    {% for oportunidade in oportunidades %}
+                    <ul>
+                        <li>{{oportunidade.id|default_if_none:""}}</li>
+                        <li>{{oportunidade.dataDeCadastro|default_if_none:""}}</li>
+                        <li>{{oportunidade.nome|default_if_none:""}}</li><!--cliente-->
+                        <li>{{oportunidade.cnpj|default_if_none:""}}</li>
+                        <li>{{oportunidade.dataDeFinalizacao|default_if_none:""}}</li>
+                        <li>{{oportunidade.numeroDeParticipantes|default_if_none:""}}</li><!--qnt interessados -->
+                        <li>{{oportunidade.status|default_if_none:""}}</li>
+                        <li class="edite"><button type="button" class="editar accordion" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Editar</button></li>
+                    </ul>
+
+                     <div id="collapseOne" class="col-lg-12 col-md-12" style="display:none">
+                         <div class="card">
+                             <div class="header">
+                                 <h4 class="title">Informação da Oportunidade</h4>
+                             </div>
+                             <div class="content">
+                                 <form>
+                                     <div class="row">
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Nome</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Empresa</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Telefone</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>E-mail</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Bairro</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Cidade</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Grau de Urgência</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label>Preferência</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label>Quantidade de Sócios</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label>Número de Participantes</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label>Serviço Solicitado</label>
+                                                 <input type="text" class="form-control border-input" placeholder="" value="">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="text-right">
+                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Finalizar</button>
+                                     </div>
+                                 </form>
+                                     <div class="interessados">
+
+                                         <h3>Informação dos interessados</h3>
+                                         <ul>
+                                             <li>01</li>
+                                             <li>Fulano da Silva</li>
+                                             <li>Public Online</li>
+                                             <li>000000000/0001-22</li>
+                                             <li>30/12/2018</li>
+                                             <li>Ativo</li>
+                                             <li class="edite"><button type="button" class="editar accordion" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Visualizar</button></li>
+                                         </ul>
+                                         <div id="collapse2" class="col-lg-12 col-md-12" style="display:none">
+                                             <div class="card">
+                                                 <div class="header">
+                                                     <h4 class="title">Informação da Oportunidade</h4>
+                                                 </div>
+                                                 <div class="content">
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Nome: Fulano da Silva</p>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Empresa: Public Online</p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Telefone: (11) 2654-9870</p>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>E-mail: publicon@gmail.com</p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Endereço: Rua José Rodrigues Pereira, 132, Buritis, São Paulo/SP</p>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>CNPJ: 000000000/0001-89</p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Data: 23/12/2018</p>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                             <div class="form-group">
+                                                                 <p>Status: Ativo</p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <div class="clearfix"></div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                             </div>
+                         </div>
+                     </div>
+                     {% endfor %}
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <!-- Modal -->
+     <div id="myModal" class="modal fade" role="dialog">
+       <div class="modal-dialog">
+
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Modal Header</h4>
+           </div>
+           <div class="modal-body">
+             <p>Some text in the modal.</p>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+       </div>
+     </div>
+ </div>
+{% endblock %}
+{% block script %}
+$(function() {
+    $("button.accordion").click(function(){
+        if($(this).hasClass("ativo")){
+            $(this).removeClass("ativo");
+        } else{
+            $(this).addClass("ativo");
+        }
+    });
+});
+{% endblock %}

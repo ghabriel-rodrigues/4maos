@@ -1,0 +1,397 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block style %}
+
+{% endblock %}
+{% block activeMenuItemPage4 %}active{% endblock %}
+{% block content %}
+
+{% if cliente.plano.hasLinkMaterialBasico %}
+<div class="titulo-azul">
+    <h1>Material de Marketing Avançado</h1>
+</div>
+<div class="avancado">
+<!--{% for servico in materialAvancado.servicos.all %}
+   <div class="each {% cycle 'each1' 'each2' %}">
+      <div class="imagem">
+          <img src="{{servico.imagem}}">
+      </div>
+      <div class="conteudo">
+          <div class="texto">
+             <h2>{{servico.nome}}</h2>
+             <h3>{{servico.slogan}}</h3>
+             <p>{{servico.descricao}}</p>
+          </div>
+          <div class="valores">
+             <div class="preco">
+                  <p>(uni)</p>
+                  <h4>R$</h4>
+                  <h3>{{servico.valor}}</h3>
+             </div>
+             <div class="compra">
+                  <a href="{{servico.get_absolute_url}}">Saiba mais</a>
+             </div>
+          </div>
+      </div>
+   </div>
+{% endfor %}-->
+  <div class="each each1">
+      <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/logo-pratileira/">
+              <div class="imagem">
+                  <img src="../../static/assets/img/pc1.png">
+              </div>
+              <div class="conteudo">
+                  <div class="texto">
+                      <h2>Logo de prateleira</h2>
+                      <h3>Nunca foi tão rapido conseguir sua logo</h3>
+                      <p>Tratam-se de opções de logos já prontas, basta entrar e escolher a que mais de agrada. Rápido e eficaz, escolha sua logo e inicie o posicionamento adequado da sua marca.</p>
+                  </div>
+                  <div class="valores">
+                      <!--<div class="preco">
+                          <p>(uni)</p>
+                          <h4>R$</h4>
+                          <h3>49,90</h3>
+                      </div>-->
+                      <div class="compra">
+                          Saiba mais
+                      </div>
+                </div>
+              </div>
+          </a>
+      </div>
+  </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/logo-personalizado/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>Logo personalizada de prateleira</h2>
+                        <h3>NUNCA FOI TÃO FÁCIL CONSEGUIR SUA LOGO PERSONALIZADA!</h3>
+                        <p>O Logo é a representação visual do seu escritório. É a primeira experiência dos clientes em relação ao seu escritório! Invista no sucesso da sua marca com uma imagem profissional e customizada, ou seja, nesse serviço criamos logomarcas de acordo com seu escritório.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>180,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/pc2.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="each each1">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/website/">
+                <div class="imagem">
+                    <img src="../../static/assets/img/website.png">
+                </div>
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>Website</h2>
+                        <h3>TENHA UM SITE PROFISSIONAL PARA SEU ESCRITÓRIO CONTÁBIL</h3>
+                        <p>Apresente os seus serviços de forma profissional, conquiste novos clientes e fidelize os seus atuais. Todos os modelos são criados para que você possua o melhor resultado na conquista de novos clientes, dessa forma ele já possui uma melhor experiência de navegação, seja em desktops, smartphones ou tablets. O formato de abordagem são os melhores do mercado.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>270,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/cartao-prateleira/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>Cartão de visita de prateleira</h2>
+                        <h3>NUNCA FOI TÃO FÁCIL CONSEGUIR SEU CARTÃO DE VISITAS PROFISSIONAL</h3>
+                        <p>Trata-se de opções de cartão de visitas já prontas, basta entrar e escolher a que mais te agrada. Rápido e eficaz, escolha e inicie o posicionamento da sua marca.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>120,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/cartao.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="each each1">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/assinatura-de-e-mail/">
+                <div class="imagem">
+                    <img src="../../static/assets/img/assinatura.png">
+                </div>
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>Assinatura de e-mail</h2>
+                        <h3>NUNCA FOI TÃO FÁCIL CONSEGUIR ASSINATURA DE E-MAIL</h3>
+                        <p>Faça agora mesmo até 5 assinaturas de e-mail para você e sua equipe. Tratam-se de opções de modelo já prontos, basta entrar e escolher a que mais te agrada. Rápido e eficaz, escolha e inicie o posicionamento da sua marca.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>89,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/google-seo/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>SEO (Search Engine Optimization)</h2>
+                        <h3>APAREÇA NO GOOGLE SEM PAGAR O CUSTO DO CLICK</h3>
+                        <p>É praticamente impossível encontrar um empreendedor que tenha acesso à internet e nunca tenha utilizado o Google para buscar informações sobre algum assunto ou até mesmo buscado algum prestador de serviço. Essa realidade acabou impactando profundamente o processo de decisão de contratar um escritório de contabilidade. Para exemplificar isso, basta observar as contabilidades online. Dessa forma clique em comprar e saiba mais.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>-</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/seo.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="each each1">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/video-animado-2d/">
+                <div class="imagem">
+                    <img src="../../static/assets/img/2d.png">
+                </div>
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>Vídeo animado 2d</h2>
+                        <h3>AJUDE O SEU CLIENTE ENTENDER SUA PROPOSTA DE VALOR E AUMENTE SUAS VENDAS</h3>
+                        <p>Você reconhece algum desses problemas em sua empresa?<br/>
+                            • Você tem uma proposta de valor diferenciada, mas seu cliente te compara com uma contabilidade que está fazendo preço muito abaixo do mercado?<br/>
+                            • Você está recebendo poucas solicitações de orçamentos?<br/>
+                            • Os clientes chegam desconhecendo muito sobre como funciona a sua prestação de serviço?<br/>
+                            Muito bem, está na hora de contratar um vídeo 2D que vai te ajudar a vender mais.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>-</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/e-mail-mkt/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>E-mail marketing</h2>
+                        <h3>NUNCA FOI TÃO FÁCIL TER UMA COMUNICAÇÃO PROFISSIONAL EM E-MAIL MARKETING</h3>
+                        <p>O e-mail marketing foi durante muito tempo sinônimo de spam e comunicações intrusivas, porém graças ao avanço das estratégias de marketing esse canal se tornou uma boa maneira de entregar as mensagens certas, para as pessoas certas, e na hora certa.<br/>
+                        Esse serviço trata-se apenas da criação da peça publicitária que é o maior desafio de escritório de contabilidade nesse requisito.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>150,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/email-marketing.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="each each1">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/12-posts-personalizados/">
+                <div class="imagem">
+                    <img src="../../static/assets/img/8posts.png">
+                </div>
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>POSTS PARA MÍDIAS SOCIAIS - PERSONALIZADOS</h2>
+                        <p>O primeiro contato do potencial cliente com a sua marca é a estética da sua página realizada através do design e identidade visual propostos pelo seu escritório contábil.<br/>
+                        O público-alvo é atingido por meios que os atraem, ou seja, a comunicação visual precisa estar de acordo com as personas que você deseja alcançar. Pensando nisso, esse serviço oferece a criação do design dos posts da sua marca para que seus valores e objetivos possam ser traduzidos através de imagens.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>199,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/4-post-blog/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>CONTEÚDO DE BLOG</h2>
+                        <p>De acordo com uma pesquisa, 61,7% das empresas no Brasil publicam posts em blog por acreditarem que seja uma boa estratégia.<br/>
+                        O mesmo estudo aponta que as empresas que utilizam essa prática aumentam em 3,7 vezes o número de visitas do site quando comparadas àquelas que não possuem um blog.<br/>
+                        Mas, na prática, por que fazer post blog?<br/>
+                        • Aumento da sua visibilidade;<br/>
+                        • Relacionamento com o seu público;<br/>
+                        • Ajuda no SEO (posicionamento organico) no Google;<br/>
+                        • Através do esclarecimento de dúvida você estabelece relacionamento com o seu cliente.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>180,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/4posts.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="each each1">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/material-rico/">
+                <div class="imagem">
+                    <img src="../../static/assets/img/material-rico.png">
+                </div>
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>1 Material rico</h2>
+                        <h3>Ebook, guia rápido, infográfico</h3>
+                        <p>Em termos de marketing digital, uma das modalidades que mais cresce é o marketing de conteúdo direcionado para dores e dúvidas dos empreendedores.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>290,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="each each2">
+        <div class="inside">
+            <a href="https://4maos.com.br/quatromaos/servico/plataforma-online/">
+                <div class="conteudo">
+                    <div class="texto">
+                        <h2>PLATAFORMA CONTABILIDADE ONLINE</h2>
+                        <h3>Quer montar uma contabilidade online?</h3>
+                        <p>A poucos vimos como o mercado contábil passou por mudanças, principalmente devido a entrada das contabildiade online não é mesmo? E caso você queira montar uma marca para também atender esse nicho de mercado, essa é a oportunidade.</p>
+                    </div>
+                    <div class="valores">
+                        <!--<div class="preco">
+                            <p>(uni)</p>
+                            <h4>R$</h4>
+                            <h3>1.450,00</h3>
+                        </div>-->
+                        <div class="compra">
+                            Saiba mais
+                        </div>
+                    </div>
+                </div>
+                <div class="imagem">
+                    <img src="../../static/assets/img/plataforma.png">
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+     <div class="row">
+        <div class="col-md-12">
+           <div class="card">
+              <div class="header accordion">
+                 <h4 class="title">Não encontrou o que gostaria? Favor nos ajude entender sua necessidade!</h4>
+              </div>
+              <div class="content">
+                 <form method="POST" class="necessidade-form">{% csrf_token %}
+                     {% bootstrap_form_errors necessidadeForm %}
+                     {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                     {% bootstrap_button "Enviar" button_type="submit" button_class="save-btn btn-wd botao-op" %}
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+
+{% else %}
+<div class="row">
+   <div class="col-md-12">
+      <div class="intro">
+         <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+      </div>
+   </div>
+</div>
+{% endif %}
+{% endblock %}

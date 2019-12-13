@@ -1,0 +1,12 @@
+{% extends "adm/base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}Editar cliente{% endblock %}
+{% block activeMenuItemPage1 %}active{% endblock %}
+{% block content %}
+<form role="form" method="POST" action="/adm/cliente/{{cliente.id}}/edit/" class="post-form">{% csrf_token %}
+   {% bootstrap_form_errors profile_form %}
+   {% bootstrap_form profile_form form_group_class="col-md-6" %}
+   {% bootstrap_button "Salvar" button_type="submit" button_class="save-btn btn btn-info btn-fill btn-wd" %}
+</form>
+{% endblock %}

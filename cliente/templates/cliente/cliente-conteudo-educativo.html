@@ -1,0 +1,217 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block style %}
+
+{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css'%}" />
+<link rel="stylesheet" type="text/css" href="{%  static 'assets/css/slick.css'%}"/>
+ <link rel="stylesheet" type="text/css" href="{%  static 'assets/css/normalize1.css'%}" />
+ <link rel="stylesheet" type="text/css" href="{%  static 'assets/css/demo1.css'%}" />
+ <link rel="stylesheet" type="text/css" href="{%  static 'assets/css/set1.css'%}" />
+ <link rel="stylesheet" type="text/css" href="{% static ' assets/css/set2.css'%}" />
+{% endblock %}
+{% block activeMenuItemPage5 %}active{% endblock %}
+
+{% block content %}
+{% if cliente.plano.hasLinkConteudoEducativo %}
+
+<div class="titulo">
+    <h1>Material Educativo</h1>
+</div>
+<div class="bigbanner">
+    <img src="{% static 'assets/img/banner-ce.jpg'%}">
+</div>
+<div class="insider">
+  <div class="row">
+
+   <div class="col-md-12">
+      {% if conteudoEducativo.videos.all %}
+      <div class="each-ce videos">
+          <h3><span><img src="{% static 'assets/img/video.png' %}"></span>Vídeos</h3>
+          <div class="row">
+             {% for video in conteudoEducativo.videos.all %}
+             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div class="video">
+                      <div class="videoWrapper">
+                          <iframe width="100%" height="auto" src="{{video.getVideo}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                      <div class="bloco">
+                          <h2>{{video.nome}}</h2>
+                          <p>assunto: <span>{{video.assunto}}</span></p>
+                      </div>
+                  </div>
+             </div>
+             {% endfor %}
+         </div>
+      </div>
+      {% endif %}
+      {% if conteudoEducativo.livros.all %}
+      <div style="clear:both;"></div>
+      <div class="each-ce ebooks">
+          <h3><span><img src="{% static 'assets/img/ebook.png' %}"></span>Ebook</h3>
+          <div class="row">
+             {% for livro in conteudoEducativo.livros.all %}
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="ebook">
+                      <div class="imagem">
+                          <img src="{{MEDIA_URL}}{{livro.capa}}" height="217" width="150"/>
+                      </div>
+                      <div class="conteudo">
+                          <h2>{{livro.nome}}</h2>
+                          <h3>por: <span>{{livro.autor}}</span></h3>
+                          <h4>Sinopse</h4>
+                          <p>{{livro.sinopse}}</p>
+                          <div class="baixar"><a class="links-download" href="#"  data-href="{{livro.arquivo.get_absolute_file_url}}">baixar</a></div>
+                      </div>
+                  </div>
+             </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if conteudoEducativo.blog.all %}
+      <div style="clear:both;"></div>
+      <div class="each-ce blogs">
+         <h3><span><img src="{% static 'assets/img/blog2.png'%}"></span>Blog</h3>
+          <div class="row">
+             {% for post in conteudoEducativo.blog.all %}
+             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="box">
+                  <div class="cima">
+                    <div class="imagem">
+                        <img height="160" width="300" src="{{MEDIA_URL}}{{post.capa}}">
+                    </div>
+                  </div>
+                  <div class="baixo">
+                    <h2>{{post.nome}}</h2>
+                    <div class="texto">
+                      <p>{{post.sinopse}}...</p>
+                    </div>
+                    <div class="baixar"><a class="links-download" href="#" data-href="{{post.arquivo.get_absolute_file_url}}">baixar</a></div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+               <div class="header accordion">
+                  <h4 class="title">Não encontrou o que gostaria? Favor nos ajude entender sua necessidade!</h4>
+               </div>
+               <div class="content">
+                  <form method="POST" class="necessidade-form">{% csrf_token %}
+                      {% bootstrap_form_errors necessidadeForm %}
+                      {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                      {% bootstrap_button "Enviar" button_type="submit" button_class="save-btn btn-wd botao-op" %}
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      {% endif %}
+{% else %}
+  <div class="row">
+     <div class="col-md-12">
+        <div class="intro">
+           <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+        </div>
+     </div>
+  </div>
+{% endif %}
+</div>
+{% endblock %}
+{% block script %}
+      //function downloadFile(data, fileName, type="text/plain") {
+         // Create an invisible A element
+      //   const a = document.createElement("a");
+      //   a.style.display = "none";
+      //   document.body.appendChild(a);
+
+         // Set the HREF to a Blob representation of the data to be downloaded
+      //   a.href = window.URL.createObjectURL(
+      //      new Blob([data], { type })
+      //   );
+
+         // Use download attribute to set set desired file name
+      //   a.setAttribute("download", fileName);
+
+         // Trigger the download by simulating click
+      //   a.click();
+
+         // Cleanup
+      //   window.URL.revokeObjectURL(a.href);
+      //   document.body.removeChild(a);
+      //}
+
+// Source: http://pixelscommander.com/en/javascript/javascript-file-download-ignore-content-type/
+window.downloadFile = function (sUrl) {
+
+    //iOS devices do not support downloading. We have to inform user about this.
+    if (/(iP)/g.test(navigator.userAgent)) {
+       //alert('Your device does not support files downloading. Please try again in desktop browser.');
+       window.open(sUrl, '_blank');
+       return false;
+    }
+
+    //If in Chrome or Safari - download via virtual link click
+    if (window.downloadFile.isChrome || window.downloadFile.isSafari) {
+        //Creating new link node.
+        var link = document.createElement('a');
+        link.href = sUrl;
+        link.setAttribute('target','_blank');
+
+        if (link.download !== undefined) {
+            //Set HTML5 download attribute. This will prevent file from opening if supported.
+            var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
+            link.download = fileName;
+        }
+
+        //Dispatching click event.
+        if (document.createEvent) {
+            var e = document.createEvent('MouseEvents');
+            e.initEvent('click', true, true);
+            link.dispatchEvent(e);
+            return true;
+        }
+    }
+
+    // Force file download (whether supported by server).
+    if (sUrl.indexOf('?') === -1) {
+        sUrl += '?download';
+    }
+
+    window.open(sUrl, '_blank');
+    return true;
+}
+
+window.downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+window.downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;
+
+      $(function() {
+         $(".links-download").click(function(){
+            var obj = $(this).attr('data-href');
+            console.log(obj);
+            downloadFile(obj);
+         });
+          var selectedClass = "";
+          $(".fil-cat").click(function(){
+          selectedClass = $(this).attr("data-rel");
+           $("#portfolio").fadeTo(100, 0.1);
+          $("#portfolio div").not("."+selectedClass).fadeOut().removeClass('scale-anm');
+          setTimeout(function() {
+            $("."+selectedClass).fadeIn().addClass('scale-anm');
+            $("#portfolio").fadeTo(300, 1);
+          }, 300);
+
+        });
+      });
+{% endblock %}

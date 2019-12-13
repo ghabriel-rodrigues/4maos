@@ -1,0 +1,240 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png'%}">
+<link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png'%}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>4 Mãos</title>
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Bootstrap core CSS     -->
+<link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" />
+
+ <!-- Animation library for notifications   -->
+<link href="{% static 'assets/css/animate.min.css'%}" rel="stylesheet"/>
+<!--  Paper Dashboard core CSS    -->
+<link href="{% static 'assets/css/style.css'%}" rel="stylesheet"/>
+<link href="{% static 'assets/css/responsive.css'%}" rel="stylesheet"/>
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="{% static 'assets/css/demo.css'%}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/component.css'%}" />
+<!--  Fonts and icons     -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet"> -->
+<link href="{% static 'assets/css/themify-icons.css'%}" rel="stylesheet">
+<link href="{% static 'assets/css/lightbox.css'%}" rel="stylesheet">
+
+<!--Core JS Files-->
+<script src="{% static 'assets/js/jquery-3.1.1.min.js'%}"></script>
+<script src="{% static 'assets/js/jquery-ui-1.12.1.min.js'%}"></script>
+<!-- <script src="{% static 'assets/js/bootstrap.min.js'%}" type="text/javascript"></script> -->
+<!--  Checkbox, Radio & Switch Plugins -->
+<!-- <script src="{% static 'assets/js/bootstrap-checkbox-radio.js'%}"></script> -->
+<!--  Charts Plugin -->
+<script src="{% static 'assets/js/chartist.min.js'%}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'assets/js/bootstrap-notify.js'%}"></script>
+<script src="{% static 'assets/js/paper-dashboard.js'%}"></script>
+<script src="{% static 'assets/js/lightbox.js'%}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js'%}"></script>
+
+
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+{% if cliente.status == "Inativo" %}
+<div class="row">
+   <div class="col-md-12">
+      <div class="card">
+         <div class="header accordion">
+            <h4 class="title">SEU USUARIO ESTA INATIVO, FAVOR ENTRE EM CONTATO PELO FORMULÁRIO ABAIXO.</h4>
+         </div>
+         <div class="content">
+            <form method="POST" class="necessidade-form">{% csrf_token %}
+                {% bootstrap_form_errors necessidadeForm %}
+                {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                {% bootstrap_button "Salvar" button_type="submit" button_class="save-btn btn btn-info btn-fill btn-wd" %}
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+{% else %}
+<div class="wrapper">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+        <div class="sidebar-wrapper">
+            {% block sidebar %}
+            <div class="logo">
+                <a href="{% if online %}/quatromaos{% endif %}/" class="simple-text">
+                    <img src="{% static 'assets/img/logo-4maos-branca.png'%}" width="200px">
+                </a>
+            </div>
+
+            <ul class="nav">
+               {% for linkHabilitado in controle.plano.linksAcessiveis.all %}
+                  {% if linkHabilitado.link == "oportunidades"%}
+                  <li class="{% block activeMenuItemPage1 %}{% endblock %}">
+                      <a href="{{site}}oportunidades/">
+                          <i class="ti-eye"></i>
+                          <p>{{linkHabilitado.nome}} <span class="novas" id="countPagas">{{totalOportunidadesPagas}}</span></p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "oportunidades-disfarcadas"%}
+                  <li class="{% block activeMenuItemPage2 %}{% endblock %}">
+                      <a href="{{site}}oportunidades-disfarcadas/">
+                          <i class="ti-eye"></i>
+                          <p>{{linkHabilitado.nome}} <span class="novas" id="countDisf">{{totalOportunidadesDisfarcadas}}</span></p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "material-marketing-apoio"%}
+                  <li class="{% block activeMenuItemPage3 %}{% endblock %}">
+                      <a href="{{site}}material-marketing-apoio/">
+                          <i class="ti-pencil"></i>
+                          <p>{{linkHabilitado.nome}} </p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "material-marketing-avancado"%}
+                  <li class="{% block activeMenuItemPage4 %}{% endblock %}">
+                      <a href="{{site}}material-marketing-avancado/">
+                          <i class="ti-pencil-alt"></i>
+                          <p>{{linkHabilitado.nome}}</p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "conteudo-educativo"%}
+                  <li class="{% block activeMenuItemPage5 %}{% endblock %}">
+                      <a href="{{site}}conteudo-educativo/">
+                          <i class="ti-book"></i>
+                          <p>{{linkHabilitado.nome}}</p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "perfil"%}
+                  <li class="{% block activeMenuItemPage6 %}{% endblock %}">
+                      <a href="{{site}}perfil/">
+                          <i class="ti-user"></i>
+                          <p>{{linkHabilitado.nome}}</p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "planos"%}
+                  <li class="{% block activeMenuItemPage9 %}{% endblock %}">
+                      <a href="{{site}}planos/">
+                          <i class="ti-user"></i>
+                          <p>{{linkHabilitado.nome}}</p>
+                      </a>
+                  </li>
+                  {% endif %}
+                  {% if linkHabilitado.link == "duvidas-frequentes"%}
+                  <li class="{% block activeMenuItemPage7 %}{% endblock %}">
+                      <a href="{{site}}duvidas-frequentes/">
+                          <i class="ti-user"></i>
+                          <p>{{linkHabilitado.nome}}</p>
+                      </a>
+                  </li>
+                  {% endif %}
+               {% endfor %}
+                  <li class="{% block activeMenuItemPage8 %}{% endblock %}">
+                      <a href="{{site}}accounts/logout/">
+                          <i class="ti-shift-right"></i>
+                          <p>Sair</p>
+                      </a>
+                  </li>
+            </ul>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+           {% block header %}
+           <div class="container-fluid">
+               <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                       <span class="sr-only">Toggle navigation</span>
+                       <span class="icon-bar bar1"></span>
+                       <span class="icon-bar bar2"></span>
+                       <span class="icon-bar bar3"></span>
+                    </button>
+               </div>
+               <div class="cred1">
+                    <a class="navbar-brand" href="#">Oportunidades <span id="countTodas" class="todas">{{totalOportunidadesAtivas}}</span></a>
+               </div>
+               <div class="cred2">
+                    <a class="creditos navbar-brand" href="#">Seus créditos <span id="creditos" class="todasc">{{controle.numeroDeVisualizacoesPagas}}</span></a>
+               </div>
+            </div>
+            {% endblock %}
+        </nav>
+        <div class="center-content"><!--sem css, só pra marcação-->
+         {% block content %}
+         {% endblock %}
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+               {% block footer %}
+               {% endblock %}
+               <div class="copyright pull-right"></div>
+            </div>
+        </footer>
+    </div>
+</div><!-- 
+<div class="wpp" style="z-index: 999;right: 0;bottom: 20px;position: fixed;width: 70px;">
+  <a href="https://api.whatsapp.com/send?phone=551142571413" target="_blank">
+    <img width="75%" src="{% static 'assets/img/wpp.png'%}">
+  </a>
+</div> -->
+</body>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('input[type="checkbox"]').click(function(){
+            if($(this).prop("checked") == true){
+                //$(".ttt").hide();
+            }
+            else if($(this).prop("checked") == false){
+                $(".ttt").show();
+            }
+        });
+    });
+
+    $("input[type='checkbox']").click(function() {
+            $(".ttt").hide();
+        $("input[type='checkbox']:checked").each(function() {
+            $("." + $(this).val()).show();
+        });
+    });
+
+    var expanded = false;
+
+    function showCheckboxes() {
+      var checkboxes = document.getElementById("checkboxes");
+      if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+      } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+      }
+    }
+
+  $('#id_mensagem').parent().addClass('totalw');
+  $('.save-btn').removeClass('btn');
+  
+{% block script %}
+{% endblock %}
+</script>
+{% endif %}
+</html>

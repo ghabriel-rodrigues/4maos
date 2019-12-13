@@ -1,0 +1,44 @@
+﻿{% extends 'cliente/base0.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage6 %}active{% endblock %}
+{% block extrahead %}
+<link  href="{% static '/assets/js/cropper/cropper.css'%}" rel="stylesheet">
+<script src="{% static '/assets/js/cropper/cropper.js'%}"></script>
+
+<script src="{% static '/assets/js/cropper/jquery-cropper.js'%}"></script>
+<script src="{% static '/assets/js/cropper/main.js'%}"></script>
+
+{% endblock %}
+{% block content %}
+<div class="img-container">
+    <img id="image" src="{% if online %}/static/uploads/{%else%}/media/{%endif%}{{request.user.cliente.logo}}" id="cropBox"/></td>
+    <div class="docs-buttons">
+        <button 
+            type="button" 
+            style="background:none; border:1px solid #afafaf; margin-top:10px; border-radius: 5px;"
+            data-method="getCroppedCanvas" 
+            data-option="{ 'maxWidth': 159, 'maxHeight': 138 }">
+            Cortar Imagem   
+        </button>
+
+        <input type="hidden" class="form-control" id="dataWidth" value="159">
+        <input type="hidden" class="form-control" id="dataHeight" value="138">
+    </div>
+</div>
+<!-- Show the cropped image in modal -->
+<div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="getCroppedCanvasTitle">Imagem cortada</h5>
+    </div>
+    <div class="modal-body"></div>
+    <div class="modal-footer">
+        <a style="background:none; border:1px solid #afafaf; margin-top:10px; color:#666; padding:3px 5px; border-radius: 5px;"
+        id="download" href="javascript:void(0);" download="img.jpg">Salvar</a>
+    </div>
+    </div>
+</div>
+</div><!-- /.modal -->
+{% endblock %}

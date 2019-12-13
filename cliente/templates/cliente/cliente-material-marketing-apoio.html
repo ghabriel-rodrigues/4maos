@@ -1,0 +1,165 @@
+{% extends 'cliente/base.html' %}
+{% load staticfiles %}
+
+{% load bootstrap3 %}
+{% block activeMenuItemPage3 %}active{% endblock %}
+{% block content %}
+{% if cliente.plano.hasLinkMaterialBasico %}
+   <div class="titulo-azul">
+    <h1>Material de Marketing de Apoio Básico</h1>
+   </div>
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+           <div class="apoio">
+
+              <div class="each">
+                  <a href="https://4maos.com.br/quatromaos/servico/post-gratuito/">
+                      <div class="imagem">
+                          <img src="../../static/assets/img/posts.jpg">
+                          <div class="texto">
+                              <div class="linhaA"></div>
+                              <h2>Posts gratuitos</h2>
+                              <div class="linhaB"></div>
+                          </div>
+                          <div class="corner">
+                              <div class="visitar">
+                                  <div></div>
+                                  <p class="conteudo">
+                                      <span class="link">
+                                          <img src="../../static/assets/img/link.png">
+                                      </span>
+                                      <span>visitar</span>
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+                    <div class="each">
+                        <a href="https://4maos.com.br/quatromaos/servico/apresentacao/">
+                            <div class="imagem">
+                                <img src="../../static/assets/img/apresentacoes.jpg">
+                                <div class="texto">
+                                    <div class="linhaA"></div>
+                                    <h2>Apresentações institucionais</h2>
+                                    <div class="linhaB"></div>
+                                </div>
+                                <div class="corner">
+                                    <div class="visitar">
+                                        <div></div>
+                                        <p class="conteudo">
+                                            <span class="link">
+                                                <img src="../../static/assets/img/link.png">
+                                            </span>
+                                            <span>visitar</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="each">
+                        <a href="https://4maos.com.br/quatromaos/servico/modelo-de-proposta/">
+                            <div class="imagem">
+                                <img src="../../static/assets/img/modelo.jpg">
+                                <div class="texto">
+                                    <div class="linhaA"></div>
+                                    <h2>Modelo de proposta</h2>
+                                    <div class="linhaB"></div>
+                                </div>
+                                <div class="corner">
+                                    <div class="visitar">
+                                        <div></div>
+                                        <p class="conteudo">
+                                            <span class="link">
+                                                <img src="../../static/assets/img/link.png">
+                                            </span>
+                                            <span>visitar</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="each">
+                        <a href="https://4maos.com.br/quatromaos/servico/papel-timbrado/">
+                            <div class="imagem">
+                                <img src="../../static/assets/img/timbrado.jpg">
+                                <div class="texto">
+                                    <div class="linhaA"></div>
+                                    <h2>Papel timbrado</h2>
+                                    <div class="linhaB"></div>
+                                </div>
+                                <div class="corner">
+                                    <div class="visitar">
+                                        <div></div>
+                                        <p class="conteudo">
+                                            <span class="link">
+                                                <img src="../../static/assets/img/link.png">
+                                            </span>
+                                            <span>visitar</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="each">
+                        <a href="https://4maos.com.br/quatromaos/servico/ata-de-reuniao/">
+                            <div class="imagem">
+                                <img src="../../static/assets/img/ata.jpg">
+                                <div class="texto">
+                                    <div class="linhaA"></div>
+                                    <h2>Modelo de ata de reunião</h2>
+                                    <div class="linhaB"></div>
+                                </div>
+                                <div class="corner">
+                                    <div class="visitar">
+                                        <div></div>
+                                        <p class="conteudo">
+                                            <span class="link">
+                                                <img src="../../static/assets/img/link.png">
+                                            </span>
+                                            <span>visitar</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-12">
+           <div class="card">
+              <div class="header accordion">
+                 <h4 class="title">Não encontrou o que gostaria? Favor nos ajude entender sua necessidade!</h4>
+              </div>
+              <div class="content">
+                 <form method="POST" class="necessidade-form">{% csrf_token %}
+                     {% bootstrap_form_errors necessidadeForm %}
+                     {% bootstrap_form necessidadeForm form_group_class="col-md-6" %}
+                     {% bootstrap_button "Enviar" button_type="submit" button_class="save-btn btn-wd botao-op" %}
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+    {% else %}
+    <div class="row">
+       <div class="col-md-12">
+          <div class="intro">
+             <p>Não foi possível para seu plano acessar essa página. Procure contato com a administração.</p>
+          </div>
+       </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,6 @@
+- django-filter sudo pip3 install django-filter
+- bootstrap3
+- python-dateutil
+- import-export pip install django-import-export
+- pip install requests
+- pip install django-cron 

@@ -1,0 +1,80 @@
+{% extends 'cliente/base0.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block activeMenuItemPage6 %}active{% endblock %}
+{% block extrahead %}
+
+{% endblock %}
+{% block style %}
+h3 {color: #003365;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 34px;
+    font-weight: 300;
+    margin-top: 15px;}
+    span {
+    color: #38bec9;
+    font-weight: 600;
+}
+button.close {
+    position: absolute;
+    top: 10px;
+    width: 130px;
+    right: 10px;
+    padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  -webkit-appearance: none;
+}
+.close p {
+    font-size: 11px;
+    position: relative;
+    top: 7px;
+}
+.card{
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+.cad p {
+    color: #003365;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding-left: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+.wrapper{
+    background-color: #fff !important;
+}
+{% endblock %}
+{% block content %}
+<div class="card">
+    <form method="POST">
+       {% csrf_token %}
+       {%if enviado%}<h1>Cadastro feito com sucesso!</h1>{%endif%}
+       {% bootstrap_form_errors profile_form %}
+       {% bootstrap_form profile_form exclude="status" form_group_class="largura-form" %}
+        <div class="text-right">
+            <button type="submit" class="botao-op">Cadastrar</button>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.largura-form input').addClass('camp');
+        $('.largura-form input').removeClass('form-control');
+        $('.largura-form textarea').addClass('camp');
+        $('.largura-form textarea').removeClass('form-control');
+        $('#id_impede').parent().addClass('totalw');
+        $('.botao-op').removeClass('btn');
+    });
+    {% block script %}
+{% endblock %}
+</script>
+ {% endblock %}
+

@@ -1,0 +1,207 @@
+@media(max-width: 1300px){
+    .video .bloco{
+        height: 260px !important;
+    }
+}
+@media (max-width: 1199px) and (min-width: 992px){
+    .avancado .compra a {
+        top: 16px;
+    }
+    .avancado .preco h3{
+        bottom: 3px;
+        font-size: 44px;
+    }
+    .avancado .each1 .conteudo, .avancado .each2 .conteudo{
+        top: 20px;
+        width: 60%;
+        padding-left: 20px;
+    }
+    .avancado .each1 .imagem, .avancado .each2 .imagem{
+        width: 40%;
+    }
+    .avancado .each1{
+        height: 330px;
+    }
+    .avancado .each .imagem img{
+        width: 100%;
+    }
+    .menuz .intz .caixa .baixo .visualizar {
+        top: 0;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 767px){
+    .consultar{
+        width: 100%;
+        float: inherit !important;
+    }
+    .menuz .intz .caixa {
+        width: 100%;
+        float: initial;
+        display: inline-block;
+        padding: 0 10px;
+    }
+    .menuz .intz .imgz {
+        width: 100%;
+        height: 168px;
+        display: inline-block;
+        float: initial;
+        text-align: center;
+    }
+    .menuz .intz .precoz{
+        float: initial;
+    }
+    .menuz .intz .precoz p {
+        color: #55b774;
+        font-weight: 900;
+        font-size: 36px;
+        line-height: initial !important;
+        margin: 0 0 25px;
+    }
+    .menuz .intz .caixa .baixo .visualizar {
+        float: initial;
+        margin-left: 0;
+        position: relative;
+        top: 0;
+        clear: both;
+        margin-bottom: 25px;
+    }
+    .avancado .each1:first-child::before{
+        border: none;
+    }
+    .avancado .each1::before{
+        border: none;
+    }
+    .avancado .each1::after{
+        border: none;
+    }
+    .avancado .each2::before{
+        border: none;
+    }
+    .avancado .each2::after{
+        border: none;
+    }
+    .logop, .sitep{
+        padding-top: 0;
+    }
+    .apoio{
+        margin-top: 0;
+    }
+    .colc1, .colc2{
+        display: none;
+    }
+    .intro p{
+        text-align: justify;
+        width: 100%;
+        float: initial;
+    }
+    .main-panel .navbar{
+        position: relative;
+    }
+    .titulo, .titulo-azul {
+        position: relative;
+        padding: 15px;
+    }
+    .titulo h1, .titulo-azul h1 {
+        color: #003366;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 26px;
+        width: 100%;
+        text-align: center;
+        line-height: 24px;
+        font-weight: 900;
+    }
+    .apoio .each .imagem {
+        object-fit: contain;
+        height: 138px;
+        width: 100%;
+        clear: both;
+    }
+    .apoio .each .imagem img {
+        height: 200px;
+        width: 100%;
+        object-fit: none;
+    }
+    .apoio .each .texto {
+        top: -120px;
+        position: relative;
+    }
+    .apoio .each {
+        cursor: pointer;
+        margin-bottom: 50px;
+    }
+    .apoio .each .texto {
+        top: -110px;
+    }
+    .cred2 {
+        float: inherit;
+        display: contents;
+    }
+    .creditos{
+        float: inherit !important;
+    }
+    .avancado {
+        margin-top: 30px;
+    }
+    .card .title{
+        text-align: center;
+        font-style: 24px;
+    }
+    .op-id {
+        text-align: right;
+        float: right;
+        display: inline-block;
+    }
+    .bloco h3{
+        display: inline-block;
+        float: inherit;
+        position: relative;
+        margin: 0;
+    }
+    .ttt{
+        padding: 15px 0;
+    }
+    .visu .data {
+        margin-top: 10px;
+    }
+    .botao-op{
+        width: 100%;
+        margin: 15px 0;
+    }
+}
+@media (max-width: 720px){
+    .avancado .each1, .avancado .each1:first-child, .avancado .each2{
+        height: auto;
+        overflow: hidden;
+    }
+    .avancado .each1 .imagem, .avancado .each1:first-child .imagem, .avancado .each1:first-child .conteudo, .avancado .each2 .imagem, .avancado .each1 .conteudo, .avancado .each2 .conteudo{
+        width: 100%;
+        float: initial;
+        top: 0;
+        margin-top: 30px;
+        left: 0;
+    }
+    .avancado .each1 .inside, .avancado .each2 .inside{
+        padding: 10px 20px 40px;
+    }
+    .avancado .each .texto, .avancado .each .texto h2, .avancado .each h3{
+        text-align: center;
+    }
+    .apoio .each .texto .linhaA, .apoio .each .texto .linhaB{
+        display: none;
+    }
+    .apoio .each .texto h2{
+        font-size: 18px;
+    }
+    .apoio .star{
+        display: none;
+    }
+    .apoio .corner{
+        display: none;
+    }
+    .menuce ul li{
+        float: initial;
+        width: 100%;
+    }
+}
